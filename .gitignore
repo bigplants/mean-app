@@ -1,13 +1,22 @@
+node_modules
+public
+.tmp
+.sass-cache
+client/bower_components
+dist
+/server/config/local.env.js
 .vagrant/*
 /build
-Berksfile
-Berksfile.lock
 .project
 .buildpath
 junit.xml
 .DS_Store
-# PhpStorm設定ファイルを除外
-# ただし、プロジェクト内で共通の設定を適用すべきファイルはバージョン管理対象にする
+# for Grunt
+/Grunt/node_modules
+/Grunt/dest
+# Docs of CSS & JS
+/docs/docco
+/docs/styledocco
 /.idea/workspace.xml
 /.idea/dataSources.ids
 /.idea/vagrant.xml
@@ -15,10 +24,4 @@ junit.xml
 /.idea/inspectionProfiles
 !/.idea/inspectionProfiles/Project_Default.xml
 /.idea/dataSources.local.xml
-# for Grunt
-/Grunt/node_modules
-/Grunt/dest
-# Copied for min files
-# Docs of CSS & JS
-/docs/docco
-/docs/styledocco
+
