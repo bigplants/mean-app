@@ -12,6 +12,10 @@ packages.each do |pkg|
   end
 end
 
+Execute "gem install sass" do
+    not_if "which sass"
+end
+
 %w{grunt-cli yo bower}.each do |p|
   execute p do
     command 'npm install -g ' + p
