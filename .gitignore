@@ -11,9 +11,7 @@ dist
 .buildpath
 junit.xml
 .DS_Store
-# for Grunt
-/Grunt/node_modules
-/Grunt/dest
+npm-debug.log
 # Docs of CSS & JS
 /docs/docco
 /docs/styledocco
