@@ -3,14 +3,7 @@ execute "apt-get update" do
   command "apt-get update"
 end
 
-apt_repository "nodejs-#{node["lsb"]["codename"]}" do
-  uri "http://ppa.launchpad.net/chris-lea/node.js/ubuntu"
-  distribution node["lsb"]["codename"]
-  components ["main"]
-  action :add
-end
-
-packages = %w{build-essential nodejs bash vim git curl imagemagick}
+packages = %w{build-essential bash vim git curl}
 packages.each do |pkg|
   package pkg do
     options "-o Dpkg::Options::='--force-confold' -f --force-yes"
@@ -28,11 +21,4 @@ end
 
 service 'apache2' do
   action :stop
-end
-
-bash "npm install & run grunt init task" do
-  code <<-EOS
-  cd #{node[:app_root]}Grunt; npm install
-  grunt jstask csstask
-  EOS
 end
