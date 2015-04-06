@@ -26,3 +26,9 @@ end
 service 'apache2' do
   action :stop
 end
+
+bash "npm install" do
+  code <<-EOS
+  cd #{node[:app_root]}; npm install
+  EOS
+end
