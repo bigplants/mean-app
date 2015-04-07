@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 execute "apt-get update" do
   action :nothing
   command "apt-get update"
