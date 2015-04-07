@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('vagrantDataApp')
-  .factory('socket', function(socketFactory) {
+  .factory('socket', function (socketFactory) {
 
     // socket.io now auto-configures its connection when we ommit a connection url
     var ioSocket = io('', {

@@ -1,82 +1,83 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /things              ->  index
- * POST    /things              ->  create
- * GET     /things/:id          ->  show
- * PUT     /things/:id          ->  update
- * DELETE  /things/:id          ->  destroy
- */
-
 'use strict';
 
 var _ = require('lodash');
-var Thing = require('./thing.model');
+var Member = require('./member.model');
 
-// Get list of things
+Member.find({}).remove(function () {
+  Member.create({
+    name: '田中_2'
+  }, {
+    name: '鈴木_2'
+  }, function (err) {
+    console.log('finished populating Members');
+  });
+});
+
+// Get list of members
 exports.index = function (req, res) {
-  Thing.find(function (err, things) {
+  Member.find(function (err, members) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(200, things);
+    return res.json(200, members);
   });
 };
 
-// Get a single thing
+// Get a single member
 exports.show = function (req, res) {
-  Thing.findById(req.params.id, function (err, thing) {
+  Member.findById(req.params.id, function (err, member) {
     if (err) {
       return handleError(res, err);
     }
-    if (!thing) {
+    if (!member) {
       return res.send(404);
     }
-    return res.json(thing);
+    return res.json(member);
   });
 };
 
-// Creates a new thing in the DB.
+// Creates a new member in the DB.
 exports.create = function (req, res) {
-  Thing.create(req.body, function (err, thing) {
+  Member.create(req.body, function (err, member) {
     if (err) {
       return handleError(res, err);
     }
-    return res.json(201, thing);
+    return res.json(201, member);
   });
 };
 
-// Updates an existing thing in the DB.
+// Updates an existing member in the DB.
 exports.update = function (req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Thing.findById(req.params.id, function (err, thing) {
+  Member.findById(req.params.id, function (err, member) {
     if (err) {
       return handleError(res, err);
     }
-    if (!thing) {
+    if (!member) {
       return res.send(404);
     }
-    var updated = _.merge(thing, req.body);
+    var updated = _.merge(member, req.body);
     updated.save(function (err) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, thing);
+      return res.json(200, member);
     });
   });
 };
 
-// Deletes a thing from the DB.
+// Deletes a member from the DB.
 exports.destroy = function (req, res) {
-  Thing.findById(req.params.id, function (err, thing) {
+  Member.findById(req.params.id, function (err, member) {
     if (err) {
       return handleError(res, err);
     }
-    if (!thing) {
+    if (!member) {
       return res.send(404);
     }
-    thing.remove(function (err) {
+    member.remove(function (err) {
       if (err) {
         return handleError(res, err);
       }

@@ -2,7 +2,6 @@
 
 angular.module 'vagrantDataApp'
 .controller 'AdminCtrl', ($scope, $http, Auth, User) ->
-
   $http.get '/api/users'
   .success (users) ->
     $scope.users = users

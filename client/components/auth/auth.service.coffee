@@ -56,9 +56,9 @@ angular.module 'vagrantDataApp'
         currentUser = User.get()
         callback? user
 
-      , (err) =>
-        @logout()
-        callback? err
+    , (err) =>
+      @logout()
+      callback? err
 
     .$promise
 
