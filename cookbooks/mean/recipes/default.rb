@@ -18,20 +18,33 @@ Execute "gem install sass" do
     not_if "which sass"
 end
 
-%w{grunt-cli yo bower}.each do |p|
-  execute p do
-    command 'npm install -g ' + p
- not_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
-  end
-end
+nodejs_npm 'grunt-cli'
+nodejs_npm 'yo'
+nodejs_npm 'bower'
+
+# %w{grunt-cli yo bower}.each do |p|
+#   execute p do
+#     command 'npm install -g ' + p
+#  not_if "npm -g ls 2> /dev/null | grep '^[├└]─[─┬] #{p}@'"
+#   end
+# end
 
 service 'apache2' do
   action :stop
 end
 
-bash "npm i and bower i" do
-  code <<-EOS
-  cd #{node[:app_root]}; npm install
-  cd #{node[:app_root]}; bower install
-  EOS
+execute 'npm package install' do
+    command "su vagrant -l -c 'cd #{node[:app_root]}; npm install'"
 end
+
+execute 'bower package install' do
+    command "su vagrant -l -c 'cd #{node[:app_root]}; bower install'"
+end
+
+# bash "npm i and bower i" do
+#   user 'vagrant'
+#   code <<-EOS
+#   cd #{node[:app_root]}; npm install
+#   cd #{node[:app_root]}; bower install
+#   EOS
+# end
