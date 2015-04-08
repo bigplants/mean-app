@@ -29,8 +29,9 @@ service 'apache2' do
   action :stop
 end
 
-bash "npm install" do
+bash "npm i and bower i" do
   code <<-EOS
   cd #{node[:app_root]}; npm install
+  cd #{node[:app_root]}; bower install
   EOS
 end
