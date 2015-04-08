@@ -12,9 +12,6 @@ dist
 junit.xml
 .DS_Store
 npm-debug.log
-# Docs of CSS & JS
-/docs/docco
-/docs/styledocco
 /.idea/workspace.xml
 /.idea/dataSources.ids
 /.idea/vagrant.xml
