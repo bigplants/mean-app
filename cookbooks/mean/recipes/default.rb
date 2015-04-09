@@ -5,7 +5,7 @@ execute "apt-get update" do
   command "apt-get update"
 end
 
-packages = %w{build-essential bash vim git curl}
+packages = %w{gcc make build-essential bash vim git curl}
 packages.each do |pkg|
   package pkg do
     options "-o Dpkg::Options::='--force-confold' -f --force-yes"
@@ -18,6 +18,7 @@ Execute "gem install sass" do
     not_if "which sass"
 end
 
+nodejs_npm 'node-gyp'
 nodejs_npm 'grunt-cli'
 nodejs_npm 'yo'
 nodejs_npm 'bower'
@@ -27,7 +28,8 @@ service 'apache2' do
 end
 
 execute 'npm package install' do
-    command "su vagrant -l -c 'cd #{node[:app_root]}; npm install --silent'"
+    # command "su vagrant -l -c 'cd #{node[:app_root]}; npm install --silent'"
+    command "su vagrant -l -c 'cd #{node[:app_root]}; npm install'"
 end
 
 execute 'bower package install' do
