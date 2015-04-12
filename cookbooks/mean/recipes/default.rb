@@ -5,7 +5,7 @@ execute "apt-get update" do
   command "apt-get update"
 end
 
-packages = %w{gcc make build-essential bash vim git curl}
+packages = %w{gcc make build-essential bash vim git curl libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev}
 packages.each do |pkg|
   package pkg do
     options "-o Dpkg::Options::='--force-confold' -f --force-yes"
