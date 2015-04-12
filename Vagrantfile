@@ -14,10 +14,14 @@ required_plugins.each do |plugin|
 end
 
 Vagrant.configure("2") do |config|
-	# config.vm.box = "hashicorp/precise32"
 	config.vm.box = "ubuntu/trusty32"
 
 	config.vm.network "private_network", ip: "192.168.50.111"
+
+	config.vm.provider "virtualbox" do |v|
+	  v.memory = 2048
+	  v.cpus = 2
+	end
 
 	config.cache.scope = :box
 	config.omnibus.chef_version = '11.4.4'

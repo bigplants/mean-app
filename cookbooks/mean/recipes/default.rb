@@ -28,8 +28,9 @@ service 'apache2' do
 end
 
 execute 'npm package install' do
-    # command "su vagrant -l -c 'cd #{node[:app_root]}; npm install --silent'"
-    command "su vagrant -l -c 'cd #{node[:app_root]}; npm install'"
+  command "sudo npm cache clean -g"
+  command "su vagrant -l -c 'cd #{node[:app_root]}; npm cache clean'"
+  command "su vagrant -l -c 'cd #{node[:app_root]}; npm install'"
 end
 
 execute 'bower package install' do
