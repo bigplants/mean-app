@@ -28,10 +28,19 @@ template "/home/vagrant/.npmrc" do
   mode 0644
   source ".npmrc"
 end
+template "/home/vagrant/.bashrc" do
+  owner "vagrant"
+  group "vagrant"
+  mode 0644
+  source ".bashrc"
+end
 
-npm_global_pacages = %w{node-gyp grunt-cli yo bower}
-npm_global_pacages.each do |npm_pkg|
-  nodejs_npm npm_pkg
+# npm_global_pacages = %w{node-gyp grunt-cli yo bower}
+# npm_global_pacages.each do |npm_pkg|
+#   nodejs_npm npm_pkg
+# end
+execute 'npm global package install' do
+  command "su vagrant -l -c 'npm i -g node-gyp grunt-cli yo bower'"
 end
 
 execute 'npm package install' do
