@@ -3,16 +3,6 @@
 var _ = require('lodash');
 var Member = require('./member.model');
 
-Member.find({}).remove(function () {
-  Member.create({
-    name: '田中_2'
-  }, {
-    name: '鈴木_2'
-  }, function (err) {
-    console.log('finished populating Members');
-  });
-});
-
 // Get list of members
 exports.index = function (req, res) {
   Member.find(function (err, members) {
