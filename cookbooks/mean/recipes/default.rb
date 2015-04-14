@@ -35,12 +35,13 @@ template "/home/vagrant/.bashrc" do
   source ".bashrc"
 end
 
-# npm_global_pacages = %w{node-gyp grunt-cli yo bower}
-# npm_global_pacages.each do |npm_pkg|
-#   nodejs_npm npm_pkg
-# end
+npm_global_pacages = %w{bower}
+npm_global_pacages.each do |npm_pkg|
+  nodejs_npm npm_pkg
+end
+
 execute 'npm global package install' do
-  command "su vagrant -l -c 'npm i -g node-gyp grunt-cli yo bower'"
+  command "su vagrant -l -c 'npm i -g node-gyp grunt-cli yo gulp'"
 end
 
 execute 'npm package install' do
