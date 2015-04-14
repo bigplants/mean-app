@@ -14,19 +14,24 @@ packages.each do |pkg|
   end
 end
 
+service 'apache2' do
+  action :stop
+end
+
 Execute "gem install sass" do
     not_if "which sass"
 end
 
-npm_global_pacages = %w{node-gyp grunt-cli yo bower}
-npm_global_pacages.each do |npm_pkg|
-  nodejs_npm npm_pkg do
-    user 'vagrant'
-  end
+template "/home/vagrant/.npmrc" do
+  owner "vagrant"
+  group "vagrant"
+  mode 0644
+  source ".npmrc"
 end
 
-service 'apache2' do
-  action :stop
+npm_global_pacages = %w{node-gyp grunt-cli yo bower}
+npm_global_pacages.each do |npm_pkg|
+  nodejs_npm npm_pkg
 end
 
 execute 'npm package install' do
