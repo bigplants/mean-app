@@ -7,5 +7,6 @@ angular.module 'vagrantDataApp'
     $scope.members = members
   $scope.createMember = ->
     if $scope.member && $scope.member.name
-      $scope.members.push name: $scope.member.name
-      $scope.member.name = ''
+      $http.post('/api/members', $scope.member).success ->
+        $scope.members.push name: $scope.member.name
+        $scope.member.name = ''
