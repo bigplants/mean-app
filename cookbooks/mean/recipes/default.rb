@@ -18,10 +18,12 @@ Execute "gem install sass" do
     not_if "which sass"
 end
 
-nodejs_npm 'node-gyp'
-nodejs_npm 'grunt-cli'
-nodejs_npm 'yo'
-nodejs_npm 'bower'
+npm_global_pacages = %w{node-gyp grunt-cli yo bower}
+npm_global_pacages.each do |npm_pkg|
+  nodejs_npm npm_pkg do
+    user 'vagrant'
+  end
+end
 
 service 'apache2' do
   action :stop
